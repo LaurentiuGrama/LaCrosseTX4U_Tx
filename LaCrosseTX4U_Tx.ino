@@ -6,8 +6,8 @@ byte               HData[11]={0,10,14, 4,5, 0,0,0,0,0,0};
 
 unsigned char      sendPin=5;
 //unsigned char      VccPin=4;
-unsigned int       lcTemp;
-unsigned int       lcHumy;
+float       CorrectionT= -0.6;
+
 
 #define receicePin 4
 #define DHTTYPE DHT22
@@ -22,11 +22,11 @@ void setup() {
 }
 
 void getData(){
-  float h = dht.readHumidity();
+  float h = dht.readHumidity() ;
   FillValue(h,"Humy");
   DebugF("Humidity",h);
   
-  float t = dht.readTemperature();
+  float t = dht.readTemperature()+ CorrectionT;
   FillValue(t,"Temp");
   DebugF("Temperature",t);
   
